@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${watch.brand + ' ' + watch.model}">Product Detail</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add your custom CSS if needed -->
+    <style>
+        .product-image {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body> 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Chrono Charm</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cart">Cart</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+
+    <div th:if="${message != null}" class="alert alert-success">
+        <span th:text="${message}"></span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2 th:text="${watch.brand + ' ' + watch.model}" class="mb-4"></h2>
+            <p><strong>Reference Number:</strong> <span th:text="${watch.refNumber}"></span></p>
+            <p><strong>Movement Type:</strong> <span th:text="${watch.movementType}"></span></p>
+            <p><strong>Case Diameter:</strong> <span th:text="${watch.caseDiameter}"></span></p>
+            <p><strong>Release Year:</strong> <span th:text="${watch.release_year}"></span></p>
+            <p><strong>Price:</strong> <span th:text="'$' + ${watch.price}"></span></p>
+            <form th:action="@{/cart/add}" method="post">
+                <input type="hidden" name="productId" th:value="${watch.watchId}" />
+                <!-- very hacky solution :p -->
+                <input type="hidden" name="redirect" th:value="${'product/' + watch.watchId}" />
+                <button type="submit" class="btn btn-primary">Add to Cart</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusTicket</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">BusTicket</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="mt-5 mb-4">Welcome to BusTicket</h1>
+        <form action="/reserve" method="post">
+            <h2>Choose your departure city:</h2>
+            <select name="fromPort" class="form-inline">
+                <option th:each="city : ${departureCities}" th:value="${city}" th:text="${city}"></option>
+            </select>
+            <p>
+            <h2>Choose your destination city:</h2>
+            <select name="toPort" class="form-inline">
+                <option th:each="city : ${destinationCities}" th:value="${city}" th:text="${city}"></option>
+            </select>
+            <p>
+            <h2>Select the date:</h2>
+            <input id="date" type="date" name="tripDate" class="form-inline">
+            <p></p>
+            <h2>Choose your prefered currency:</h2>
+            <select name="currency" class="form-inline">
+                <option th:each="code : ${currencyCodes}" th:value="${code}" th:text="${code}"></option>
+            </select>
+            <p></p>
+            <div class="container">
+                <input type="submit" class="btn btn-primary" value="Find Tickets" />
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
